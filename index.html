@@ -3,12 +3,73 @@
 <head>
 <title>Student Management | Harsha</title>
 <style>
-  Sabhi fields bharna zaroori hai!");
+  Haan, yahan code duplicate (double baar paste) ho gaya hai! Is wajah se file kharab ho gayi hai aur text screen par print ho raha hai. Niche wala hissa purane code ke saath overlap ho gaya hai.
+Ise theek karne ke liye yeh karein:
+Fix Kaise Karein:
+ * GitHub editor mein jaakar Select All karein taaki sara code ek sath select ho jaye.
+ * Use Delete karke poora box bilkul khali (empty) kar dein (ek bhi line baki na rahe).
+ * Uske baad niche diya gaya yeh clean code sirf ek baar copy karke paste kar dein aur Commit changes par click kardein:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; color: white; padding: 15px; margin: 0; }
+        h1 { text-align: center; color: #38bdf8; font-size: 22px; }
+        p { text-align: center; color: #94a3b8; font-size: 12px; }
+        .card { background: #1e293b; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        input, button { width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #334155; box-sizing: border-box; font-size: 14px; }
+        input { background: #0f172a; color: white; }
+        .btn-add { background: #10b981; color: white; font-weight: bold; border: none; cursor: pointer; }
+        .btn-delete { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #334155; padding: 8px; text-align: center; font-size: 13px; }
+        th { background: #0f172a; color: #38bdf8; }
+    </style>
+</head>
+<body>
+
+    <h1>Student Management System</h1>
+    <p>By Harsha Khobragade</p>
+
+    <div class="card">
+        <h3>Add Student</h3>
+        <input type="text" id="name" placeholder="Student Name">
+        <input type="text" id="roll" placeholder="Roll No">
+        <input type="text" id="course" placeholder="Course (e.g. BCA)">
+        <button class="btn-add" onclick="addStudent()">Add Student</button>
+    </div>
+
+    <div class="card">
+        <h3>Students List (<span id="count">0</span>)</h3>
+        <table>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", showData);
+
+        function addStudent() {
+            var name = document.getElementById("name").value.trim();
+            var roll = document.getElementById("roll").value.trim();
+            var course = document.getElementById("course").value.trim();
+
+            if(name === "" || roll === "" || course === "") {
+                alert("Sabhi fields bharna zaroori hai!");
                 return;
             }
 
-            let list = JSON.parse(localStorage.getItem("students")) || [];
-            list.push({ roll, name, course });
+            var list = JSON.parse(localStorage.getItem("students")) || [];
+            list.push({ roll: roll, name: name, course: course });
             localStorage.setItem("students", JSON.stringify(list));
 
             document.getElementById("name").value = "";
@@ -18,46 +79,28 @@
         }
 
         function showData() {
-            let list = JSON.parse(localStorage.getItem("students")) || [];
-            let tbody = document.getElementById("tableBody");
+            var list = JSON.parse(localStorage.getItem("students")) || [];
+            var tbody = document.getElementById("tableBody");
             document.getElementById("count").innerText = list.length;
             tbody.innerHTML = "";
 
-            list.forEach((s, i) => {
-                tbody.innerHTML += `<tr>
-                    <td>${s.roll}</td>
-                    <td>${s.name}</td>
-                    <td>${s.course}</td>
-                    <td><button class="btn-delete" onclick="del(${i})">Delete</button></td>
-                </tr>`;
-            });
+            for(var i = 0; i < list.length; i++) {
+                var rowHTML = "<tr>" +
+                    "<td>" + list[i].roll + "</td>" +
+                    "<td>" + list[i].name + "</td>" +
+                    "<td>" + list[i].course + "</td>" +
+                    "<td><button class='btn-delete' onclick='del(" + i + ")'>Delete</button></td>" +
+                "</tr>";
+                tbody.innerHTML += rowHTML;
+            }
         }
 
         function del(i) {
-            let list = JSON.parse(localStorage.getItem("students")) || [];
+            var list = JSON.parse(localStorage.getItem("students")) || [];
             list.splice(i, 1);
             localStorage.setItem("students", JSON.stringify(list));
             showData();
         }
     </script>
-</body>
-</html>
-
-  innerHTML+=`<tr><td>${s.roll}</td><td>${s.name}</td><td>${s.course}</td><td><button onclick="del(${i})" style="background:red;padding:5px">Delete</button></td></tr>`;
-});
-}
-function addStudent(){
-let n=document.getElementById('name').value;
-let r=document.getElementById('roll').value;
-let c=document.getElementById('course').value;
-if(!n||!r||!c){alert('Fill all fields');return}
-students.push({name:n,roll:r,course:c});
-localStorage.setItem('students',JSON.stringify(students));
-show();
-document.getElementById('name').value='';document.getElementById('roll').value='';document.getElementById('course').value='';
-}
-function del(i){students.splice(i,1);localStorage.setItem('students',JSON.stringify(students));show();}
-show();
-</script>
 </body>
   </html>
