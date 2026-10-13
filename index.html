@@ -3,40 +3,7 @@
 <head>
 <title>Student Management | Harsha</title>
 <style>
-body{font-family:Arial;background:#0d1117;color:white;margin:0;padding:20px}
-h1{text-align:center;color:#58a6ff}
-.card{background:#161b22;padding:20px;border-radius:10px;max-width:600px;margin:20px auto;border:1px solid #30363d}
-input,button{width:100%;padding:10px;margin:8px 0;border-radius:5px;border:none}
-input{background:#0d1117;color:white;border:1px solid #30363d}
-button{background:#238636;color:white;font-weight:bold;cursor:pointer}
-table{width:100%;border-collapse:collapse;margin-top:20px}
-th,td{border:1px solid #30363d;padding:8px;text-align:left}
-th{background:#161b22}
-</style>
-</head>
-<body>
-<h1>Student Management System</h1>
-<p style="text-align:center">By Harsha Khobragade - Java Full Stack Project</p>
-<div class="card">
-<h3>Add New Student</h3>
-<input id="name" placeholder="Student Name">
-<input id="roll" placeholder="Roll No">
-<input id="course" placeholder="Course e.g. BCA">
-<button onclick="addStudent()">Add Student</button>
-</div>
-<div class="card">
-<h3>All Students</h3>
-<table id="table">
-<tr><th>Roll No</th><th>Name</th><th>Course</th><th>Action</th></tr>
-</table>
-</div>
-<script>
-let students=JSON.parse(localStorage.getItem('students')||'[]');
-function show(){
-let t=document.getElementById('table');
-t.innerHTML='<tr><th>Roll No</th><th>Name</th><th>Course</th><th>Action</th></tr>';
-students.forEach((s,i)=>{
-t.innerHTML+=`<tr><td>${s.roll}</td><td>${s.name}</td><td>${s.course}</td><td><button onclick="del(${i})" style="background:red;padding:5px">Delete</button></td></tr>`;
+  .innerHTML+=`<tr><td>${s.roll}</td><td>${s.name}</td><td>${s.course}</td><td><button onclick="del(${i})" style="background:red;padding:5px">Delete</button></td></tr>`;
 });
 }
 function addStudent(){
